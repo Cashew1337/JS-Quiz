@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+nav {
+    margin-bottom: 10px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+.quiz-body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-content: center;
+    padding: 0 45px;
+}
+
+#start-quiz {
+    color: blueviolet;
+    background-color: turquoise;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 15px;
+    margin: auto;
+}
+
+#highscores {
+    padding: 20px 50px;
+    text-decoration: none;
+}
