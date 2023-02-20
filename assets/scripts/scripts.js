@@ -1,9 +1,10 @@
 //Variables
 var timerEl = document.querySelector('.timer-element');
 var quizEl = document.querySelector('.quiz-body');
-var startBtn = document.getElementById('start-quiz');
+var startBtnEl = document.getElementById('start-quiz');
 var highscoreEl = document.getElementById('highscores');
-var secondsLeft = 75;
+var secondsLeft;
+var timerInterval;
 var questions = [
     {
         question: 'What is Javascript?',
@@ -68,31 +69,49 @@ var questions = [
 
 //Functions
 function startGame() {
-
+    secondsLeft = 75;
+    setTimer();
+    questionAndAnswer();
 }
 
 function questionAndAnswer() {
+    for (var i = 0; i < questions.length; i++) {
+        var question = questions[i].question;
+        var choices = questions[i].choices;
+    }
+    var quizQuestionEl = document.createElement('p');
+    var quizAnswersEl = document.createElement('ul');
+    var answer1 = document.createElement('button');
+    var answer2 = document.createElement('button');
+    var answer3 = document.createElement('button');
+    var answer4 = document.createElement('button');
 
+    quizAnswersEl.appendChild('answer1, answer2, answer3, answer4');
+    quizQuestionEl.innerHTML = 'question';
+    quizAnswersEl.innerHTML = 'choices';
+    quizEl.replaceChildren(quizQuestionEl, quizAnswersEl);
 }
 
 function setTimer() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
         timerEl.textContent = 'Time: ' + secondsLeft;
-
-        if(secondsLeft === 0) {
+        if (secondsLeft === 0) {
             clearInterval(timerInterval);
             saveHighscore();
         }
     }, 1000);
 }
 
-function highscore() {
+function renderScore() {
 
 }
 
 function saveHighscore() {
+    window.location.assign("./highscore.html")
+    renderScore();
 
 }
 
 //Initiators
+startBtnEl.addEventListener('click', startGame);

@@ -4,21 +4,22 @@
 <head>
     <meta charset="UTF-8" />
     <title>JS Quiz</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
 </head>
 
 <body>
     <main>
         <nav class="top-bar">
-            <a href="#" id="highscores">Highscores</a>
-            <div class="timer-element">Time: 75</div>
+            <a href="./highscore.html" id="highscores">Highscores</a>
+            <div class="timer-element"></div>
         </nav>
 
         <div class="quiz-body">
             <h2 id="quiz-title">Javascript Timed Quiz</h2>
             <p id="quiz-description">This quiz is designed to test your knowledge of Javascript. Once you press the Start Quiz button, you will have 90 seconds to complete the quiz.<br> Each correct answer will move you to the next question. Each incorrect answer will take 10 seconds off the remaining time. <br> Once you complete the quiz, if you are proud of your score, please be sure to enter your name in the box to submit it to the highscores board!</p>
 
-            <button id="start-quiz">Start Quiz</button>
+            <button type="button" id="start-quiz">Start Quiz</button>
         </div>
 
     </main>
