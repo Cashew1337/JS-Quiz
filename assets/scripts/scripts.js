@@ -1,6 +1,8 @@
 //Variables
 var timerEl = document.querySelector('.timer-element');
 var quizEl = document.querySelector('.quiz-body');
+var quizTitle = document.getElementById('quiz-title');
+var quizDescription = document.getElementById('quiz-description');
 var startBtnEl = document.getElementById('start-quiz');
 var highscoreEl = document.getElementById('highscores');
 var secondsLeft;
@@ -80,16 +82,26 @@ function questionAndAnswer() {
         var choices = questions[i].choices;
     }
     var quizQuestionEl = document.createElement('p');
-    var quizAnswersEl = document.createElement('ul');
     var answer1 = document.createElement('button');
+    answer1.textContent = choices[0];
     var answer2 = document.createElement('button');
+    answer2.textContent = choices[1];
     var answer3 = document.createElement('button');
+    answer3.textContent = choices[2];
     var answer4 = document.createElement('button');
+    answer4.textContent = choices[3];
+    
+    quizQuestionEl.innerHTML = question;
+    while (quizEl.hasChildNodes()) {
+        quizEl.removeChild(quizEl.firstChild);
+    }
+    quizEl.appendChild(quizQuestionEl);
+    quizEl.appendChild(answer1);
+    quizEl.appendChild(answer2);
+    quizEl.appendChild(answer3);
+    quizEl.appendChild(answer4);
 
-    quizAnswersEl.appendChild('answer1, answer2, answer3, answer4');
-    quizQuestionEl.innerHTML = 'question';
-    quizAnswersEl.innerHTML = 'choices';
-    quizEl.replaceChildren(quizQuestionEl, quizAnswersEl);
+    console.log(quizEl)
 }
 
 function setTimer() {
@@ -109,8 +121,8 @@ function renderScore() {
 
 function saveHighscore() {
     window.location.assign("./highscore.html")
+    
     renderScore();
-
 }
 
 //Initiators

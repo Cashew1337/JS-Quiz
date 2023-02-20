@@ -22,7 +22,14 @@ nav .timer-element {
 
 #highscores {
     text-decoration: none;
+}
 
+#home {
+    text-decoration: none;
+    float: left;
+    align-self: center;
+    padding: 10px;
+    font-size: x-large;
 }
 
 #quiz-description {
