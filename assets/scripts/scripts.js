@@ -8,12 +8,11 @@ var highscoreEl = document.getElementById('highscores');
 var secondsLeft;
 var timerInterval;
 let i = 0;
-var question;
 var questions = [
     {
         question: 'What is Javascript?',
         choices: ['JavaScript is a scripting language used to make the website interactive', 'JavaScript is an assembly language used to make the website interactive', 'JavaScript is a compiled language used to make the website interactive', 'None of the mentioned'],
-        answer: [0]
+        answer: '0'
     },
 
     {
@@ -70,6 +69,8 @@ var questions = [
         answer: [2]
     }
 ];
+var questionJson = JSON.stringify(questions);
+
 console.log(questions);
 //Function to start the quiz
 function startGame() {
@@ -80,20 +81,24 @@ function startGame() {
 
 //Function used to render questions from questions array
 function questionAndAnswer() {
-    for (var i = 0; i < questions.length; i++) {
+        var answerJson = JSON.parse(questionJson);
         var question = questions[i].question;
         var choices = questions[i].choices;
-    }
     var quizQuestionEl = document.createElement('p');
     var answer1 = document.createElement('button');
     answer1.textContent = choices[0];
+        answer1.setAttribute('class', 'answer')
     var answer2 = document.createElement('button');
     answer2.textContent = choices[1];
+        answer2.setAttribute('class', 'answer')
     var answer3 = document.createElement('button');
     answer3.textContent = choices[2];
+        answer3.setAttribute('class', 'answer')
     var answer4 = document.createElement('button');
     answer4.textContent = choices[3];
+        answer4.setAttribute('class', 'answer')
     quizQuestionEl.innerHTML = question;
+    
     while (quizEl.hasChildNodes()) {
         quizEl.removeChild(quizEl.firstChild);
     }
@@ -103,11 +108,22 @@ function questionAndAnswer() {
     quizEl.appendChild(answer3);
     quizEl.appendChild(answer4);
 
-    console.log(quizEl)
+    answer1.addEventListener('click', checkAnswer);
+    answer2.addEventListener('click', checkAnswer);
+    answer3.addEventListener('click', checkAnswer);
+    answer4.addEventListener('click', checkAnswer);
+
+    //Function to check selected answer
+function checkAnswer() {
+    var answers = document.getElementById('answer')
+    if (answers === questions.answer) {
+        question++
+    } else {
+        secondsLeft-10;
+    }
 }
 
-function checkAnswer() {
-
+    console.log(quizEl)
 }
 
 //Function to start the timer and end the quiz if timer reaches 0
@@ -122,6 +138,7 @@ function setTimer() {
     }, 1000);
 }
 
+//Function to render the highscores on the Highscores page
 function renderScore() {
 
 }
