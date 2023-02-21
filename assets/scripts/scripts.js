@@ -7,6 +7,8 @@ var startBtnEl = document.getElementById('start-quiz');
 var highscoreEl = document.getElementById('highscores');
 var secondsLeft;
 var timerInterval;
+let i = 0;
+var question;
 var questions = [
     {
         question: 'What is Javascript?',
@@ -68,14 +70,15 @@ var questions = [
         answer: [2]
     }
 ];
-
-//Functions
+console.log(questions);
+//Function to start the quiz
 function startGame() {
     secondsLeft = 75;
     setTimer();
     questionAndAnswer();
 }
 
+//Function used to render questions from questions array
 function questionAndAnswer() {
     for (var i = 0; i < questions.length; i++) {
         var question = questions[i].question;
@@ -90,7 +93,6 @@ function questionAndAnswer() {
     answer3.textContent = choices[2];
     var answer4 = document.createElement('button');
     answer4.textContent = choices[3];
-    
     quizQuestionEl.innerHTML = question;
     while (quizEl.hasChildNodes()) {
         quizEl.removeChild(quizEl.firstChild);
@@ -104,6 +106,11 @@ function questionAndAnswer() {
     console.log(quizEl)
 }
 
+function checkAnswer() {
+
+}
+
+//Function to start the timer and end the quiz if timer reaches 0
 function setTimer() {
     timerInterval = setInterval(function () {
         secondsLeft--;
@@ -119,11 +126,12 @@ function renderScore() {
 
 }
 
+//Function to save the new score to the highscore page
 function saveHighscore() {
-    window.location.assign("./highscore.html")
-    
+    window.location.assign("./highscore.html");
     renderScore();
+
 }
 
-//Initiators
+//Initiates the quiz by initiating the startGame() function
 startBtnEl.addEventListener('click', startGame);
