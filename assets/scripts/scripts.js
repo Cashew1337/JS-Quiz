@@ -8,68 +8,71 @@ var highscoreEl = document.getElementById('highscores');
 var secondsLeft;
 var timerInterval;
 let i = 0;
+var question;
+var choices;
+var correctAnswer;
+var button = document.querySelector('button');
 var questions = [
     {
         question: 'What is Javascript?',
-        choices: ['JavaScript is a scripting language used to make the website interactive', 'JavaScript is an assembly language used to make the website interactive', 'JavaScript is a compiled language used to make the website interactive', 'None of the mentioned'],
-        answer: '0'
+        choices: {a: 'JavaScript is a scripting language used to make the website interactive', b: 'JavaScript is an assembly language used to make the website interactive', c: 'JavaScript is a compiled language used to make the website interactive', d: 'None of the mentioned'},
+        correctAnswer: 'a'
     },
 
     {
         question: 'What is used to select an item by its ID?',
-        choices: ['document.querySelector', 'document.getElementById', 'item.getById', 'item.id'],
-        answer: [1]
+        choices: {a: 'document.querySelector', b: 'document.getElementById', c: 'item.getById', d: 'item.id'},
+        correctAnswer: 'b'
     },
 
     {
         question: 'Arrays in JavaScript are defined by which of the following statements?',
-        choices: ['It is an ordered list of values', 'It is an ordered list of objects', 'It is an ordered list of string', 'It is an ordered list of functions'],
-        answer: [0]
+        choices: {a: 'It is an ordered list of values', b: 'It is an ordered list of objects', c: 'It is an ordered list of string', d: 'It is an ordered list of functions'},
+        correctAnswer: 'a'
     },
 
     {
         question: 'What element is Javascript enclosed in when entered into HTML?',
-        choices: ['<javascript>', '<js>', '<scripting>', '<script>'],
-        answer: [3]
+        choices: {a: '<javascript>', b: '<js>', c: '<scripting>', d: '<script>'},
+        correctAnswer: 'd'
     },
 
     {
         question: 'What is the correct JavaScript syntax to change the content of the HTML element below? <p id="demo">This is a demonstration.</p>?',
-        choices: ['document.getElement("p").innerHTML = "Hello World!";', 'document.getElementById("demo").innerHTML = "Hello World!";', '#demo.innerHTML = "Hello World!";', 'document.getElementByName("p").innerHTML = "Hello World!";'],
-        answer: [1]
+        choices: {a: 'document.getElement("p").innerHTML = "Hello World!";', b: 'document.getElementById("demo").innerHTML = "Hello World!";', c: '#demo.innerHTML = "Hello World!";', d: 'document.getElementByName("p").innerHTML = "Hello World!";'},
+        correctAnswer: 'b'
     },
 
     {
         question: 'Where is the correct place to insert a JavaScript?',
-        choices: ['The <head> section', 'The <body> section', 'Both the <head> section and the <body> section are correct'],
-        answer: [2]
+        choices: {a: 'The <head> section', b: 'The <body> section', c: 'Both the <head> section and the <body> section are correct'},
+        correctAnswer: 'c'
     },
 
     {
         question: 'How do you create a function in JavaScript?',
-        choices: ['function:myFunction()', 'function = myFunction()', 'function myFunction()'],
-        answer: [2]
+        choices: {a: 'function:myFunction()', b: 'function = myFunction()', c: 'function myFunction()'},
+        correctAnswer: 'c'
     },
 
     {
         question: 'How do you write "Hello World" in an alert box?',
-        choices: ['msgBox("Hello World");', 'alertBox("Hello World");', 'alert("Hello World");', 'msg("Hello World");'],
-        answer: [2]
+        choices: {a: 'msgBox("Hello World");', b: 'alertBox("Hello World");', c: 'alert("Hello World");', d: 'msg("Hello World");'},
+        correctAnswer: 'c'
     },
 
     {
         question: 'How to write an IF statement in JavaScript?',
-        choices: ['if i == 5 then', 'if i = 5 then', 'if i = 5', 'if (i == 5)'],
-        answer: [3]
+        choices: {a: 'if i == 5 then', b: 'if i = 5 then', c: 'if i = 5', d: 'if (i == 5)'},
+        correctAnswer: 'd'
     },
 
     {
         question: 'How does a FOR loop start?',
-        choices: ['for (i = 0; i <= 5)', 'for i = 1 to 5', 'for (i = 0; i <= 5; i++)', 'for (i <= 5; i++)'],
-        answer: [2]
+        choices: {a: 'for (i = 0; i <= 5)', b: 'for i = 1 to 5', c: 'for (i = 0; i <= 5; i++)', d: 'for (i <= 5; i++)'},
+        correctAnswer: 'c'
     }
 ];
-var questionJson = JSON.stringify(questions);
 
 console.log(questions);
 //Function to start the quiz
@@ -81,24 +84,25 @@ function startGame() {
 
 //Function used to render questions from questions array
 function questionAndAnswer() {
-        var answerJson = JSON.parse(questionJson);
-        var question = questions[i].question;
-        var choices = questions[i].choices;
+    question = questions[i].question;
+    choices = questions[i].choices;
+    correctAnswer = questions[i].correctAnswer;
     var quizQuestionEl = document.createElement('p');
     var answer1 = document.createElement('button');
-    answer1.textContent = choices[0];
-        answer1.setAttribute('class', 'answer')
+    answer1.textContent = 'a: ' + choices['a'];
+    answer1.setAttribute('id', 'a');
     var answer2 = document.createElement('button');
-    answer2.textContent = choices[1];
-        answer2.setAttribute('class', 'answer')
+    answer2.textContent = 'b: ' + choices['b'];
+    answer2.setAttribute('id', 'b');
     var answer3 = document.createElement('button');
-    answer3.textContent = choices[2];
-        answer3.setAttribute('class', 'answer')
+    answer3.textContent = 'c: ' + choices['c'];
+    answer3.setAttribute('id', 'c');
     var answer4 = document.createElement('button');
-    answer4.textContent = choices[3];
-        answer4.setAttribute('class', 'answer')
-    quizQuestionEl.innerHTML = question;
+    answer4.textContent = 'd: ' + choices['d'];
+    answer4.setAttribute('id', 'd');
     
+    quizQuestionEl.innerHTML = question;
+
     while (quizEl.hasChildNodes()) {
         quizEl.removeChild(quizEl.firstChild);
     }
@@ -108,22 +112,19 @@ function questionAndAnswer() {
     quizEl.appendChild(answer3);
     quizEl.appendChild(answer4);
 
-    answer1.addEventListener('click', checkAnswer);
-    answer2.addEventListener('click', checkAnswer);
-    answer3.addEventListener('click', checkAnswer);
-    answer4.addEventListener('click', checkAnswer);
-
-    //Function to check selected answer
-function checkAnswer() {
-    var answers = document.getElementById('answer')
-    if (answers === questions.answer) {
-        question++
-    } else {
-        secondsLeft-10;
-    }
+    button.onclick(checkAnswer);
+    console.log(quizEl)
 }
 
-    console.log(quizEl)
+//Function to check selected answer
+function checkAnswer() {
+    
+
+    if (button === correctAnswer) {
+        i++
+    } else {
+        secondsLeft - 10;
+    }
 }
 
 //Function to start the timer and end the quiz if timer reaches 0
@@ -150,5 +151,9 @@ function saveHighscore() {
 
 }
 
+var a = document.getElementById('a')
+var b = document.getElementById('b')
+var c = document.getElementById('c')
+var d = document.getElementById('d')
 //Initiates the quiz by initiating the startGame() function
 startBtnEl.addEventListener('click', startGame);
