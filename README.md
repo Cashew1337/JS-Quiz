@@ -6,7 +6,7 @@ This project was created to generate a simple multiple choice quiz for Javascrip
 #Usage
 To use the app, click the "Start Quiz" button and click the button you believe to be the answer to the question. If you are correct, you will move to the next question. If you are incorrect, 10 seconds will be subtracted from the remaining time. You will continue to answer the questions until you either complete the quiz or run out of time. You will then be redirected to another page to enter your score and view previous highscores.
 
-The link to the app is located here:
+The link to the app is located here:https://cashew1337.github.io/JS-Quiz/
 
 Below is a screenshot of the application page:
 ![jsquiz](https://user-images.githubusercontent.com/121908566/220492366-a5c87f85-e86a-4c48-b6b5-9209d6fa64c1.PNG)
