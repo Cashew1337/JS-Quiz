@@ -4,13 +4,15 @@ var quizEl = document.querySelector('.quiz-body');
 var quizTitle = document.getElementById('quiz-title');
 var quizDescription = document.getElementById('quiz-description');
 var startBtnEl = document.getElementById('start-quiz');
-var highscoreEl = document.getElementById('highscores');
+var submitScoreButton = document.getElementById('score-submit');
+var highScoreButton = document.getElementById('highscore-button');
 
 var a = document.getElementById('a')
 var b = document.getElementById('b')
 var c = document.getElementById('c')
 var d = document.getElementById('d')
 
+var quizScore = 0;
 var secondsLeft;
 var timerInterval;
 let i = 0;
@@ -84,6 +86,7 @@ var questions = [
 console.log(questions.length);
 //Function to start the quiz
 function startGame() {
+    console.log('button clicked');
     secondsLeft = 75;
     setTimer();
     questionAndAnswer();
@@ -152,16 +155,9 @@ function setTimer() {
     }, 1000);
 }
 
-//Function to render the highscores on the Highscores page
-function renderScore() {
-
-}
-
 //Function to save the new score to the highscore page
 function saveHighscore() {
-    window.location.replace("./highscore.html");
-    renderScore();
-
+    window.location.replace("./submit.html");
 }
 
 //Initiates the quiz by initiating the startGame() function
