@@ -135,7 +135,9 @@ quizEl.addEventListener('click', function (event) {
         var pressedButton = element.getAttribute('id');
 
         if (pressedButton === correctAnswer) {
+            quizScore += 5;
             i++;
+            question++;
             questionAndAnswer();
         } else if (secondsLeft >= 10) {
             secondsLeft = secondsLeft - 10;
@@ -148,7 +150,7 @@ function setTimer() {
     timerInterval = setInterval(function () {
         secondsLeft--;
         timerEl.textContent = 'Time: ' + secondsLeft;
-        if (secondsLeft === 0) {
+        if (secondsLeft === 0 || question === questions.length) {
             clearInterval(timerInterval);
             saveHighscore();
         }
@@ -157,6 +159,11 @@ function setTimer() {
 
 //Function to save the new score to the highscore page
 function saveHighscore() {
+    var newScore = [];
+    newScore.push(quizScore);
+
+    localStorage.setItem('newScore', JSON.stringify(newScore));
+
     window.location.replace("./submit.html");
 }
 

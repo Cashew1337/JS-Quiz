@@ -1,7 +1,9 @@
 scoreList = document.querySelector('.score-list');
 
-var highScore = JSON.parse(localStorage.getItem("highScores"));
+var highScore = JSON.parse(localStorage.getItem("scores"));
 // var highScoreList = [];
+console.log(highScore.length);
+
 
 if (highScore && highScore.length) {
     renderHighScores();
